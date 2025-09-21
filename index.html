@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senda - Login</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="globals.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <header>
+        <h1>
+            <span class="brand">Senda</span>
+            <span class="highlight">Personal Notebook</span>
+        </h1>
+        <p class="subtitle">Your beautiful digital space for to do's &amp; dreams</p>
+        <button id="theme-toggle" aria-label="Change theme"><i class="bi bi-palette"></i><p>Themes</p></button>
+        <div id="overlay" class="overlay hidden"></div>
+        <div id="theme-panel" class="panel hidden">
+            <div class="panel-header">
+                <h3>Choose Your Theme</h3>
+                <button id="close-theme" aria-label="Close">&times;</button>
+            </div>
+            <ul class="theme-list">
+                <li data-theme="soft-pastels">
+                    <span class="dots soft-pastels">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span>Soft Pastels</span>
+                </li>
+                
+                <li data-theme="rose-garden">
+                    <span class="dots rose-garden">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span>Rose Garden</span>
+                </li>
+
+                <li data-theme="sage-mint">
+                    <span class="dots sage-mint">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span>Sage & Mint</span>
+                </li>
+
+                <li data-theme="lavender-dreams">
+                    <span class="dots lavender-dreams">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span>Lavender Dreams</span>
+                </li>
+
+                <li data-theme="sunset-peach">
+                    <span class="dots sunset-peach">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span>Sunset Peach</span>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="login-card">
+            <h2>Welcome Back</h2>
+            <p>Sign in to your notebook</p>
+
+            <form id="login-form">
+                <label for="username">User Name</label>
+                <input 
+                type="username" 
+                id="username" 
+                name="username" 
+                placeholder="Your user" 
+                required
+                >
+
+                <label for="password">Password</label>
+                <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                placeholder="******" 
+                required
+                >
+
+                <button type="submit" >Sign In</button>
+            </form>
+            <div class="decoration">
+                <div class="blob var1"></div>
+                <div class="blob var2"></div>
+                <div class="blob var3"></div>
+                <div class="blob var4"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Made with love for aesthetic souls ✨</p>
+    </footer>
+</body>
+<script src="app.js"></script>
+</html>

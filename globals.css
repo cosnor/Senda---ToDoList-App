@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Kalam:wght@300;400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+:root {
+    --bg: #faf9f7;
+    --bg-login: #fbf7ef;
+    --text: #3d3832;
+    --text-muted: #6b655f;
+    --card: #f5f4f2;
+    --border: #e8e6e3;
+    --primary: #d4a574;
+    --accent: #e8e1c8;
+    --notebook-pink: #f2d5d0;
+    --notebook-green: #d8e5d0;
+    --notebook-yellow: #f5f0d0;
+    --notebook-blue: #d0e0f0;
+    --notebook-purple: #e0d0f0;
+    --notebook-pink-strong:   #d07f79;  /* coral rosado */
+    --notebook-green-strong:  #8bbf65;  /* verde fresco */
+    --notebook-yellow-strong: #e0c240;  /* amarillo mostaza */
+    --notebook-blue-strong:   #5a9bd5;  /* azul brillante */
+    --notebook-purple-strong: #9b6dd6;  /* violeta intenso */
+    --notebook-pink-accent:   #c97a733c;
+    --notebook-green-accent:  #7a9a5f3c;
+    --notebook-yellow-accent: #b8a7483c;
+    --notebook-blue-accent:   #4a71963c;
+    --notebook-purple-accent: #765c9e3c;
+
+    --font-primary: "Playfair Display", serif;
+    --font-secondary: "Kalam", cursive;
+    --font-body: "Geist Sans", sans-serif;
+    --font-mono: "Geist Mono", monospace;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+}
+
+
+.theme-soft-pastels {
+    --bg: #faf9f7;
+    --text: #3d3832;
+    --card: #f5f4f2;
+    --border: #e8e6e3;
+    --primary: #d4a574;
+    --accent: #e8e1c8;
+    --notebook-pink: #f2d5d0;
+    --notebook-green: #d8e5d0;
+    --notebook-yellow: #f5f0d0;
+    --notebook-blue: #d0e0f0;
+    --notebook-purple: #e0d0f0;
+}
+
+.theme-rose-garden {
+    --bg: #fdf8f9;
+    --text: #2e1a1d;
+    --card: #f7f0f2;
+    --border: #e8dde0;
+    --primary: #d67b8a;
+    --accent: #c9749c;
+    --notebook-pink: #e6a8b8;
+    --notebook-green: #c8d5c0;
+    --notebook-yellow: #f0d8a8;
+    --notebook-blue: #b8c8e6;
+    --notebook-purple: #d0a8d8;
+}
+
+.theme-sage-mint {
+    --bg: #f8faf8;
+    --text: #1f2e20;
+    --card: #f2f5f2;
+    --border: #dde5dd;
+    --primary: #7ba085;
+    --accent: #8fb098;
+    --notebook-pink: #d8c0a8;
+    --notebook-green: #a8c8a8;
+    --notebook-yellow: #e8d8a8;
+    --notebook-blue: #a8c0d8;
+    --notebook-purple: #c0a8d8;
+}
+
+.theme-lavender-dreams {
+    --bg: #faf9fb;
+    --text: #2a1f2e;
+    --card: #f5f2f7;
+    --border: #e5dde8;
+    --primary: #9d7bc9;
+    --accent: #b89dd4;
+    --notebook-pink: #d8a8c8;
+    --notebook-green: #c0d5a8;
+    --notebook-yellow: #e8d0a8;
+    --notebook-blue: #a8b8e6;
+    --notebook-purple: #c8a8e6;
+}
+
+.theme-sunset-peach {
+    --bg: #fdf9f7;
+    --text: #2e221f;
+    --card: #f7f2f0;
+    --border: #e8ddd8;
+    --primary: #d4956b;
+    --accent: #c9855a;
+    --notebook-pink: #e6b8a8;
+    --notebook-green: #c0d5a8;
+    --notebook-yellow: #f0d8a8;
+    --notebook-blue: #a8c0d8;
+    --notebook-purple: #c8a8d0;
+}
+
+i {
+  color: var(--text);
+}
+
+.shake {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  background: rgba(0, 0, 0, 0.5); /* oscurece todo */
+  backdrop-filter: blur(2px); /* opcional: desenfoque */
+  z-index: 10;
+}
+
+.hidden {
+  display: none;
+}
+
+.panel {
+  display: none;
+  position: absolute;
+  width: 30rem;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  background: var(--card);
+  box-shadow: -4px 0 12px rgba(0,0,0,0.1);
+  padding: 2rem;
+  flex-direction: column;
+  z-index: 20;
+  border-radius: 12px;
+}
+
+.panel.show {
+  display: flex;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-family: var(--font-primary);
+  color: var(--text);
+}
+
+.panel-header h3 {
+  padding-left: 1rem;
+  font-size: 2rem;
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 2rem;
+}
+
+#close-theme {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.theme-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.theme-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-family: var(--font-secondary);
+  font-size: 1.4rem;
+}
+
+.theme-list li:hover {
+  background: var(--accent);
+}
+
+.dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.dots span {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+  border: solid var(--text-muted) 1px;
+}
+
+.soft-pastels span:first-child {
+  background: #fcefee;
+}
+
+.soft-pastels span:nth-child(2) {
+  background: #d6e9d2;
+}
+
+.soft-pastels span:nth-child(3) {
+  background: #f4e1a1;
+}
+
+.rose-garden span:first-child {
+  background: #ffe3ec;
+}
+
+.rose-garden span:nth-child(2) {
+  background: #ff4d6d;
+}
+
+.rose-garden span:nth-child(3) {
+  background: #d62246;
+}
+
+.sage-mint span:first-child {
+  background: #a8e6cf;
+}
+
+.sage-mint span:nth-child(2) {
+  background: #00b894;
+}
+
+.sage-mint span:nth-child(3) {
+  background: #00897b;
+}
+
+.lavender-dreams span:first-child {
+  background: #e0bbff;
+}
+
+.lavender-dreams span:nth-child(2) {
+  background: #9d4edd;
+}
+
+.lavender-dreams span:nth-child(3) {
+  background: #7b2cbf;
+}
+
+.sunset-peach span:first-child {
+  background: #ffd6a5;
+}
+
+.sunset-peach span:nth-child(2) {
+  background: #ff8fab;
+}
+
+.sunset-peach span:nth-child(3) {
+  background: #ff6f61;
+}

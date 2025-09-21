@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Senda - My Notebook</title>
+        <link rel="stylesheet" href="todo.css">
+        <link rel="stylesheet" href="globals.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    </head>
+    <body>
+        <header class="topbar">
+            <div class="topbar-title">
+                <h1><i class="bi bi-journals"></i> Welcome back, <span id="username">Admin</span>!</h1>
+                <p class="date"> ------ Monday, September 22, 2025</p>
+            </div>
+            <nav class="user-actions">
+                <span class="user"><i class="bi bi-person"></i>Admin</span>
+                <button id="open-toggle" aria-label="Change theme"><i class="bi bi-palette"></i>Themes</button>
+
+                <button id="sign-out"><i class="bi bi-box-arrow-right"></i>Sign Out</button>
+            </nav>
+            <div id="overlay" class="overlay hidden"></div>
+            <div id="theme-panel" class="panel hidden">
+                <div class="panel-header">
+                    <h3>Choose Your Theme</h3>
+                    <button id="close-theme" aria-label="Close">&times;</button>
+                </div>
+                <ul class="theme-list">
+                    <li data-theme="soft-pastels">
+                        <span class="dots soft-pastels">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                        <span>Soft Pastels</span>
+                    </li>
+                    
+                    <li data-theme="rose-garden">
+                        <span class="dots rose-garden">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                        <span>Rose Garden</span>
+                    </li>
+
+                    <li data-theme="sage-mint">
+                        <span class="dots sage-mint">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                        <span>Sage & Mint</span>
+                    </li>
+
+                    <li data-theme="lavender-dreams">
+                        <span class="dots lavender-dreams">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                        <span>Lavender Dreams</span>
+                    </li>
+
+                    <li data-theme="sunset-peach">
+                        <span class="dots sunset-peach">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                        <span>Sunset Peach</span>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <main>
+            
+            <section class="stats">
+                <article class="stat-card total">
+                    <div class="card-icon">
+                        <i class="bi bi-heart"></i>
+                    </div>
+                    <div class="card-content">
+                        <h2>Total Tasks</h2>
+                        <p class="value">0</p>
+                    </div>
+                </article>
+
+                <article class="stat-card completed">
+                    <div class="card-icon">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                    <div class="card-content">
+                        <h2>Completed</h2>
+                        <p class="value">0</p>
+                    </div>
+                </article>
+
+                <article class="stat-card progress">
+                    <div class="card-icon">
+                        <i class="bi bi-stars"></i>
+                    </div>
+                    <div class="card-content">
+                        <h2>Progress</h2>
+                        <p class="value">0%</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Botón de acción -->
+            <section class="task-actions">
+                <button id="add-task"><i class="bi bi-patch-plus"></i>Add New Task</button>
+            </section>
+            <section class="task-form hidden">
+                <form id="taskForm">
+                    <!-- Título -->
+                    <div class="form-group">
+                    <label for="title">Task Title</label>
+                    <input type="text" id="title" name="title" placeholder="What would you like to accomplish?" required>
+                    </div>
+
+                    <!-- Descripción -->
+                    <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="3" placeholder="Add some details..."></textarea>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn add-task">Add Task</button>
+                    </div>
+
+                </form>
+            </section>
+
+
+            <!-- Lista de tareas -->
+            <section class="task-list">
+            </section>
+        </main>
+        <footer>
+            <p>"The secret of getting ahead is getting started" ✨ ❤️</p>
+        </footer>
+    </body>
+    <script src="todo.js"></script>
+</html>
