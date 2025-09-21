@@ -536,3 +536,23 @@ footer {
         font-size: 1.2rem;
     }
 }
+
+/* Animación para actualización de estadísticas */
+.stat-card.updated {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+.stat-card.updated .value {
+  animation: pulse-update 0.6s ease-in-out;
+}
+
+@keyframes pulse-update {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.stat-card {
+  transition: transform 0.3s ease-in-out;
+}
