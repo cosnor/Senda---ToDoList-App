@@ -1,4 +1,4 @@
-# ToDoList App
+# Senda - To Do List App
 
 This project is a simple web application that simulates an authentication system and a To-Do List manager, built only with semantic HTML, basic CSS (Grid/Flexbox), and pure JavaScript (vanilla JS).
 
@@ -10,9 +10,7 @@ Login form with username and password.
 
 Static valid credentials:
 
-```
-const users = [{ username: "admin", password: "admin" }];
-```
+```const users = [{ username: "admin", password: "admin" }];```
 
 On successful login:
 
@@ -30,7 +28,7 @@ Includes a Logout button that clears the authentication state from localStorage 
 
 Implements a CRUD system for tasks with the following structure:
 
-```
+```js
 {
   id: number,
   text: string,
@@ -69,28 +67,26 @@ Retrieved todos are displayed below the user-created ones, keeping chronological
 
 ### 5. HTML & CSS
 
-Semantic HTML for structure.
+- Semantic HTML for structure.
 
-CSS Grid for the main layout.
+- CSS Grid for the main layout.
 
-Flexbox for the task list.
+- Flexbox for the task list.
 
-## 📂 Project Structure
-📦 project
- ┣ 📜 index.html        # Login page
- ┣ 📜 todo.html         # To-Do List page
- ┣ 📜 styles.css        # Styles (Grid / Flexbox)
- ┣ 📜 app.js            # Main logic for authentication and CRUD
- ┗ 📜 README.md         # Documentation
+## 📦 Dependencies
+
+This project uses [Bootstrap Icons](https://icons.getbootstrap.com/).
+
+To install, run:
+
+```npm install bootstrap-icons```
 
 
 ## ▶️ How to Run
 
 Clone this repository:
 
-```
-git clone <repository-url>
-```
+```git clone <repository-url>```
 
 Open index.html in your browser.
 
