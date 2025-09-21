@@ -15,8 +15,42 @@ const taskFormSection = document.querySelector(".task-form");
 const taskForm = document.getElementById("taskForm");
 const taskList = document.querySelector(".task-list");
 
+// Elemento para logout
+const logoutBtn = document.getElementById("sign-out");
+
 // Array global para las tareas (no se usa actualmente)
 const todos =  [];
+
+// ==========================================
+// FUNCIONES DE AUTENTICACIÓN
+// ==========================================
+
+/**
+ * Verifica si el usuario está autenticado
+ * @returns {boolean} true si está autenticado, false si no
+ */
+const isAuthenticated = () => {
+    return localStorage.getItem("isAuthenticated") === "true";
+};
+
+/**
+ * Elimina el estado de autenticación y redirige al login
+ */
+const logout = () => {
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("currentUser");
+    window.location.href = "index.html";
+};
+
+/**
+ * Protege la página verificando la autenticación
+ * Si no está autenticado, redirige al login
+ */
+const protectPage = () => {
+    if (!isAuthenticated()) {
+        window.location.href = "index.html";
+    }
+};
 
 // ==========================================
 // FUNCIONES AUXILIARES
@@ -66,14 +100,6 @@ themeOptions.forEach(option => {
         panel.classList.remove("show");
         overlay.classList.add("hidden");
     });
-});
-
-// Cargar tema guardado al cargar la página
-window.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem("selectedTheme");
-    if (savedTheme) {
-        document.body.className = "theme-"+savedTheme;
-    }
 });
 
 // ==========================================
@@ -185,6 +211,9 @@ const handleTaskCheck = (event) => {
         
         // Guardar cambios en localStorage
         localStorage.setItem("todos", JSON.stringify(todos));
+        
+        // Actualizar estadísticas
+        updateStatsDisplay();
     }
 }
 
@@ -198,6 +227,7 @@ const deleteTask = (id) => {
     todos = todos.filter(t => t.id !== id);
     localStorage.setItem("todos", JSON.stringify(todos));
     drawTasks(); // Actualizar la vista
+    updateStatsDisplay(); // Actualizar estadísticas
 }
 
 /**
@@ -243,7 +273,6 @@ const drawTasks = () => {
                         <p>Start by adding your first beautiful task above</p>
                     </article>
             `;
-        return;
     } else {
         // Limpiar lista existente
         taskList.innerHTML = "";
@@ -291,6 +320,9 @@ const drawTasks = () => {
             });
         });
     }
+    
+    // Actualizar estadísticas después de renderizar
+    updateStatsDisplay();
 }
 
 // ==========================================
@@ -350,9 +382,74 @@ taskForm.addEventListener("submit", (event) => {
     addTaskBtn.classList.remove("active");
     addTaskBtn.innerHTML = '<i class="bi bi-patch-plus"></i> Add New Task';
     
-    // Actualizar la vista
+    // Actualizar la vista y estadísticas
     drawTasks();
 });
+
+// ==========================================
+// FUNCIONES PARA ESTADÍSTICAS
+// ==========================================
+
+/**
+ * Calcula las estadísticas de las tareas
+ * @returns {Object} Objeto con estadísticas calculadas
+ */
+const calculateStats = () => {
+    const todos = getToDos();
+    const totalTasks = todos.length;
+    const completedTasks = todos.filter(todo => todo.done).length;
+    const progressPercentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+    
+    return {
+        total: totalTasks,
+        completed: completedTasks,
+        pending: totalTasks - completedTasks,
+        progress: progressPercentage
+    };
+};
+
+/**
+ * Actualiza la interfaz con las estadísticas actuales
+ */
+const updateStatsDisplay = () => {
+    const stats = calculateStats();
+    
+    // Actualizar elementos del DOM
+    const totalCard = document.querySelector('.stat-card.total .value');
+    const completedCard = document.querySelector('.stat-card.completed .value');
+    const progressCard = document.querySelector('.stat-card.progress .value');
+    
+    if (totalCard) totalCard.textContent = stats.total;
+    if (completedCard) completedCard.textContent = stats.completed;
+    if (progressCard) progressCard.textContent = `${stats.progress}%`;
+    
+    // Agregar animación visual a las tarjetas
+    [totalCard, completedCard, progressCard].forEach(card => {
+        if (card) {
+            card.closest('.stat-card').classList.add('updated');
+            setTimeout(() => {
+                card.closest('.stat-card').classList.remove('updated');
+            }, 300);
+        }
+    });
+};
+
+// ==========================================
+// EVENT LISTENERS ADICIONALES
+// ==========================================
+
+/**
+ * Event listener para el botón de logout
+ */
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        // Confirmar logout
+        if (confirm("¿Estás seguro que quieres cerrar sesión?")) {
+            logout();
+        }
+    });
+}
 
 // ==========================================
 // INICIALIZACIÓN
@@ -362,5 +459,27 @@ taskForm.addEventListener("submit", (event) => {
  * Inicializar la aplicación cuando el DOM esté completamente cargado
  */
 window.addEventListener("DOMContentLoaded", () => {
-    drawTasks(); // Cargar y mostrar las tareas existentes
+    // Proteger la página verificando autenticación primero
+    protectPage();
+    
+    // Si llegamos aquí, el usuario está autenticado
+    
+    // Cargar tema guardado
+    const savedTheme = localStorage.getItem("selectedTheme");
+    if (savedTheme) {
+        document.body.className = "theme-"+savedTheme;
+    }
+    
+    // Mostrar nombre del usuario autenticado
+    const currentUser = localStorage.getItem("currentUser");
+    if (currentUser) {
+        const usernameSpan = document.getElementById("username");
+        const currentUserSpan = document.getElementById("current-user");
+        if (usernameSpan) usernameSpan.textContent = currentUser;
+        if (currentUserSpan) currentUserSpan.textContent = currentUser;
+    }
+    
+    // Cargar y mostrar las tareas existentes
+    drawTasks();
+    updateStatsDisplay(); // Actualizar estadísticas al iniciar
 });
