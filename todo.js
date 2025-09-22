@@ -164,7 +164,7 @@ const fetchApiTodos = async () => {
         console.log("Iniciando fetch de tareas desde API externa...");
         
         // Realizar petición HTTP GET a la API de DummyJSON
-        const response = await fetch("https://dummyjson.com/c/28e8-a101-4422-11");
+        const response = await fetch("https://dummyjson.com/c/d816-bf35-4c84-9d60");
         
         // Verificar si la respuesta fue exitosa
         if (!response.ok) {
