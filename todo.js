@@ -57,6 +57,39 @@ const protectPage = () => {
 // ==========================================
 // FUNCIONES AUXILIARES PARA DATOS LOCALES
 // ==========================================
+// PANEL DE ERRORES ESTÉTICO
+// ==========================================
+function showErrorPanel(message) {
+    let panel = document.getElementById('error-panel');
+    if (!panel) {
+        panel = document.createElement('div');
+        panel.id = 'error-panel';
+        panel.style.position = 'fixed';
+        panel.style.top = '2rem';
+        panel.style.right = '2rem';
+        panel.style.zIndex = '1000';
+        panel.style.background = 'var(--notebook-pink, #f2d5d0)';
+        panel.style.color = 'var(--text, #3d3832)';
+        panel.style.border = '2px solid var(--primary, #d4a574)';
+        panel.style.borderRadius = '1rem';
+        panel.style.boxShadow = '0 4px 16px rgba(0,0,0,0.15)';
+        panel.style.padding = '1.2rem 2rem';
+        panel.style.fontFamily = 'var(--font-primary, sans-serif)';
+        panel.style.fontSize = '1.4rem';
+        panel.style.display = 'flex';
+        panel.style.alignItems = 'center';
+        panel.style.gap = '1rem';
+        panel.innerHTML = `<i class=\"bi bi-exclamation-triangle\" style=\"font-size:2rem;color:var(--notebook-pink-strong,#d07f79);\"></i><span id=\"error-panel-message\"></span><button id=\"error-panel-close\" style=\"margin-left:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;\">&times;</button>`;
+        document.body.appendChild(panel);
+        panel.querySelector('#error-panel-close').onclick = () => panel.remove();
+    }
+    panel.querySelector('#error-panel-message').textContent = message;
+    panel.style.display = 'flex';
+    setTimeout(() => {
+        if (panel) panel.style.display = 'none';
+    }, 4000);
+}
+// ==========================================
 
 /**
  * Obtiene todas las tareas locales almacenadas en localStorage
@@ -365,19 +398,15 @@ const newTask = () => {
 const handleTaskCheck = (event) => {
     const id = parseInt(event.target.getAttribute("data-id"));
     const isFromApi = event.target.getAttribute("data-from-api") === "true";
-    
     // Solo permitir modificaciones en tareas locales
     if (isFromApi) {
-        // Revertir el cambio en el checkbox
         event.target.checked = !event.target.checked;
-        alert("No puedes modificar tareas importadas desde la API");
+        showErrorPanel("You cannot modify tasks imported from the API.");
         return;
     }
-    
     // Procesar cambio en tarea local
     const localTodos = getToDos();
     const todo = localTodos.find(t => t.id === id);
-    
     if (todo) {
         // Actualizar estado de la tarea
         todo.done = event.target.checked;
@@ -408,10 +437,9 @@ const handleTaskCheck = (event) => {
 const deleteTask = (id, isFromApi = false) => {
     // Verificar si es una tarea de la API
     if (isFromApi) {
-        alert("No puedes eliminar tareas importadas desde la API");
+        showErrorPanel("You cannot delete tasks imported from the API.");
         return;
     }
-    
     // Eliminar solo tareas locales
     let localTodos = getToDos();
     localTodos = localTodos.filter(t => t.id !== id);
@@ -431,7 +459,7 @@ const deleteTask = (id, isFromApi = false) => {
 const handleEdit = (id, isFromApi = false) => {
     // Verificar si es una tarea de la API
     if (isFromApi) {
-        alert("No puedes editar tareas importadas desde la API");
+        showErrorPanel("You cannot edit tasks imported from the API.");
         return;
     }
     
@@ -569,13 +597,10 @@ taskForm.addEventListener("submit", (event) => {
     
     // Validar solo el título (la descripción es opcional)
     const titleErrors = validateTaskText(titleValue, !!editingId, editingId);
-    
     // Mostrar errores si existen
     if (titleErrors.length > 0) {
-        let errorMessage = "Validation errors:\n";
-        errorMessage += "\nTask Title:\n" + titleErrors.map(error => "• " + error).join("\n");
-        
-        alert(errorMessage);
+        let errorMessage = titleErrors.map(error => "• " + error).join("<br>");
+        showErrorPanel(errorMessage);
         return; // No continuar con el guardado
     }
     
