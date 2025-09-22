@@ -724,17 +724,27 @@ if (logoutBtn) {
 window.addEventListener("DOMContentLoaded", async () => {
     // Paso 1: Proteger la página verificando autenticación primero
     protectPage();
-    
+
     // Si llegamos aquí, el usuario está autenticado
     console.log("Usuario autenticado, iniciando aplicación...");
-    
+
     // Paso 2: Cargar tema guardado del usuario
     const savedTheme = localStorage.getItem("selectedTheme");
     if (savedTheme) {
         document.body.className = "theme-" + savedTheme;
         console.log("Tema cargado:", savedTheme);
     }
-    
+
+    // Mostrar la fecha actual en el formato deseado
+    const dateElement = document.getElementById('current-date');
+    if (dateElement) {
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        let formatted = now.toLocaleDateString('en-US', options);
+        formatted = formatted.charAt(0).toUpperCase() + formatted.slice(1);
+        dateElement.textContent = `------ ${formatted}`;
+    }
+
     // Paso 3: Mostrar nombre del usuario autenticado en la interfaz
     const currentUser = localStorage.getItem("currentUser");
     if (currentUser) {
@@ -744,7 +754,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         if (currentUserSpan) currentUserSpan.textContent = currentUser;
         console.log("Usuario actual mostrado:", currentUser);
     }
-    
+
     // Paso 4: Cargar tareas desde API externa de forma asíncrona
     try {
         console.log("Cargando tareas desde API externa...");
@@ -755,10 +765,10 @@ window.addEventListener("DOMContentLoaded", async () => {
         // Continuar sin las tareas de la API en caso de error
         apiTodos = [];
     }
-    
+
     // Paso 5: Renderizar todas las tareas (locales + API) y actualizar estadísticas
     drawTasks();
     updateStatsDisplay();
-    
+
     console.log("Inicialización completa de la aplicación terminada");
 });
